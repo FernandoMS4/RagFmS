@@ -4,6 +4,7 @@ import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http'
 import { SessionService } from './services/session.service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
+import { TokenRefreshRequestModel } from './models/token-refreshtoken.model';
 // const TOKEN_HEADER_KEY = 'Authorization';  // for Spring Boot back-end
 const TOKEN_HEADER_KEY = 'authorization';    // for Node.js Express back-end
 @Injectable()
@@ -40,9 +41,13 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
       const refreshToken = localStorage.getItem("refreshToken");
-      const email = JSON.parse(localStorage.getItem("user")!).email;
-      if (refreshToken && email) {
-        return this.sessionService.refreshToken(refreshToken, email).pipe(
+      const token = localStorage.getItem("token")!;
+      if (refreshToken && token) {
+        let tokenRefreshToken: TokenRefreshRequestModel = {
+          refreshToken,
+          token
+        };
+        return this.sessionService.refreshToken(tokenRefreshToken).pipe(
           switchMap((result: any) => {
             this.isRefreshing = false;
             const token = result.token;

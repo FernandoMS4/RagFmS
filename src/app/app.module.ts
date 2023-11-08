@@ -6,7 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Interceptor } from './app.interceptor.module';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxLoadingModule } from "ngx-loading";
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Translate
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -16,6 +19,9 @@ import { LoginComponent } from './pages/login/login.component';
 // Primeng
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { FieldsetModule } from 'primeng/fieldset';
+import { PasswordModule } from 'primeng/password';
+import { TooltipModule } from 'primeng/tooltip';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,10 +46,17 @@ export function defaultLanguage(): string {
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    NgxLoadingModule.forRoot({}),
     ButtonModule,
     InputTextModule,
+    FieldsetModule,
+    PasswordModule,
+    TooltipModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     TranslateModule,
     Interceptor,
+    HttpClientModule,
     TranslateModule.forRoot({
       defaultLanguage: 'pt-BR',
       loader: {

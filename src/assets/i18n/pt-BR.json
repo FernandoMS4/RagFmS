@@ -1,0 +1,8 @@
+{
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Enviar",
+    "login": "Login",
+    "enter_email": "Insira seu email",
+    "enter_password": "Insira sua senha com no mínimo 8 caracteres e no máximo 30, utilizando caracteres especiais, números, letras maiúsculas e minúsculas"
+}

@@ -1,11 +1,20 @@
+<div class="board">
+    <p-fieldset legend="{{'login' | translate}}">
+        <form [formGroup]="formLogin">
+            <p>{{'email' | translate}}: </p>
+            <input type="email" pInputText formControlName="email" [email]="true" class="inputEmail" pTooltip="{{'enter_email' | translate}}" />
 
-<p>Email: </p>
-<input type="text" pInputText [(ngModel)]="email" />
+            <p>{{'password' | translate}}: </p>
+            <p-password [feedback]="true" formControlName="password" [toggleMask]="false" pTooltip="{{'enter_password' | translate}}"></p-password>
 
-<p>Password: </p>
-<input type="text" pInputText [(ngModel)]="password" />
+            <p>
+                <p-button label="{{'submit' | translate}}" (onClick)="submitLogin()" [disabled]="!this.formLogin.valid"></p-button>
+            </p>
+        </form>
+    </p-fieldset>
+</div>
 
-
-<p>
-    <p-button label="Submit"></p-button>
-</p>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>
